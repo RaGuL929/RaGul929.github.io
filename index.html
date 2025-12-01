@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ragul Paramasivam - Data Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --porsche-white: #FAFAFA;
+            --cascade-dark: #2C3E50;
+            --cascade-blue: #3498DB;
+            --cascade-green: #27AE60;
+            --mountain-gray: #95A5A6;
+            --snow-white: #FFFFFF;
+            --accent-gold: #F39C12;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+            color: var(--cascade-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Mountain Background Effect */
+        .mountain-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.1;
+            background: 
+                linear-gradient(to bottom, transparent 0%, transparent 40%, #1a252f 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><path d="M0 600 L200 300 L400 400 L600 200 L800 350 L1000 250 L1200 400 L1200 600 Z" fill="%23FAFAFA" opacity="0.3"/><path d="M0 600 L150 450 L350 500 L550 350 L750 450 L950 380 L1200 480 L1200 600 Z" fill="%23FAFAFA" opacity="0.2"/></svg>');
+            background-size: cover;
+            background-position: bottom;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--porsche-white) 0%, var(--snow-white) 100%);
+            border-radius: 20px;
+            padding: 4rem 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--cascade-dark);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--cascade-blue);
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .hero .location {
+            font-size: 1.1rem;
+            color: var(--mountain-gray);
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: var(--cascade-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            background: var(--snow-white);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+            background: var(--cascade-blue);
+            color: var(--snow-white);
+        }
+
+        /* Content Sections */
+        .section {
+            background: var(--porsche-white);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--cascade-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid var(--cascade-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .section-title i {
+            color: var(--cascade-blue);
+        }
+
+        /* Education & Experience Items */
+        .item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .item-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--cascade-dark);
+        }
+
+        .item-date {
+            color: var(--cascade-blue);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .item-subtitle {
+            font-size: 1.1rem;
+            color: var(--mountain-gray);
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+
+        .item-location {
+            color: var(--mountain-gray);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .item li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.6rem;
+            position: relative;
+            color: var(--cascade-dark);
+        }
+
+        .item li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--cascade-blue);
+            font-weight: bold;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--snow-white);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--cascade-blue);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-left-color: var(--cascade-green);
+            transform: translateX(5px);
+        }
+
+        .skill-category h3 {
+            color: var(--cascade-dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-category p {
+            color: var(--mountain-gray);
+            line-height: 1.8;
+        }
+
+        /* Projects */
+        .project {
+            background: var(--snow-white);
+            padding: 1.8rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--cascade-green);
+            transition: all 0.3s ease;
+        }
+
+        .project:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            color: var(--cascade-dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .project-tech {
+            color: var(--cascade-blue);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+            }
+
+            .item-header {
+                flex-direction: column;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mountain-bg"></div>
+    
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero fade-in">
+            <div class="hero-content">
+                <h1>Ragul Paramasivam</h1>
+                <p class="tagline">Senior Data Engineer</p>
+                <p class="location"><i class="fas fa-mountain"></i> Seattle, WA</p>
+                <div class="contact-links">
+                    <a href="mailto:ragul.paramasivam@gmail.com">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                    <a href="https://linkedin.com/in/ragul-param" target="_blank">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="#" onclick="alert('Download CV functionality')">
+                        <i class="fas fa-download"></i> Download CV
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="section fade-in">
+            <h2 class="section-title">
+                <i class="fas fa-graduation-cap"></i> Education
+            </h2>
+            <div class="item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Northeastern University</div>
+                        <div class="item-subtitle">Master of Science in Data Architecture and Management</div>
+                        <div class="item-location">Seattle, Washington</div>
+                    </div>
+                    <div class="item-date">Expected December 2025</div>
+                </div>
+                <ul>
+                    <li>Dean's Scholarship Recipient</li>
+                    <li>Focus: Data Lake Architecture, Distributed Systems, ML Engineering</li>
+                </ul>
+            </div>
+            <div class="item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Amrita University</div>
+                        <div class="item-subtitle">Bachelor of Technology in Computer Science</div>
+                        <div class="item-location">Coimbatore, India</div>
+                    </div>
+                    <div class="item-date">June 2020</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Skills Section -->
+        <section class="section fade-in">
+            <h2 class="section-title">
+                <i class="fas fa-code"></i> Technical Skills
+            </h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Data Engineering</h3>
+                    <p>Apache Spark, Apache Kafka, Airflow, PySpark, Flink-style streaming, ETL/ELT Pipelines, Real-time & Batch Processing</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Programming & Databases</h3>
+                    <p>Python, SQL, TypeScript, PostgreSQL, MongoDB, Neo4j, Snowflake, ElasticSearch, Redis</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Cloud Platforms</h3>
+                    <p>AWS (EC2, ECS, Lambda, S3, Route 53, VPC), GCP (BigQuery, Dataproc, Cloud Storage), Azure (Databricks, Data Lake Storage)</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Infrastructure & DevOps</h3>
+                    <p>Terraform, Docker, Kubernetes, Jenkins, GitLab CI/CD, Infrastructure as Code (IaC)</p>
+                </div>
+                <div class="skill-category">
+                    <h3>ML & Analytics</h3>
+                    <p>PyTorch, OpenCV, ML Pipeline Development, Time-Series Forecasting, Computer Vision, Power BI, Tableau, Streamlit</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Architecture</h3>
+                    <p>Data Lake Design, Microservices, Distributed Systems, Data Modeling, Stream & Batch Architecture</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Experience Section -->
+        <section class="section fade-in">
+            <h2 class="section-title">
+                <i class="fas fa-briefcase"></i> Professional Experience
+            </h2>
+            
+            <div class="item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Roboteon</div>
+                        <div class="item-subtitle">Software Intern</div>
+                        <div class="item-location">San Jose, California</div>
+                    </div>
+                    <div class="item-date">May 2024 - December 2024</div>
+                </div>
+                <ul>
+                    <li>Architected AWS infrastructure using ECS clusters, custom VPCs, and Terraform IaC, automating provisioning and reducing deployment time by 40%</li>
+                    <li>Built and maintained GitLab CI/CD pipelines for 15+ microservices and ML services</li>
+                    <li>Integrated OpenCV-based 6D pose estimation service improving item identification accuracy by 25% and throughput by 30%</li>
+                    <li>Engineered Neo4j-based graph database solution for warehouse traffic mapping, reducing average travel time by 20%</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">PurpleScape</div>
+                        <div class="item-subtitle">Senior Technology Engineer</div>
+                        <div class="item-location">Chennai, India</div>
+                    </div>
+                    <div class="item-date">April 2022 - May 2023</div>
+                </div>
+                <ul>
+                    <li>Architected and deployed Spark and Airflow-based data pipelines processing 5TB+ monthly data, reducing ML training time by 30%</li>
+                    <li>Developed 8+ production-grade TypeScript microservices supporting 50,000+ MAU for NLP-driven analytics platform</li>
+                    <li>Managed multi-cloud infrastructure maintaining 99.9% uptime for mission-critical analytics workloads</li>
+                    <li>Created shared Jenkins CI/CD pipeline infrastructure used by 12+ services, reducing deployment cycle time by 60%</li>
+                </ul>
+            </div>
+
+            <div class="item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-subtitle">Technology Engineer</div>
+                        <div class="item-location">Chennai, India</div>
+                    </div>
+                    <div class="item-date">November 2020 - March 2022</div>
+                </div>
+                <ul>
+                    <li>Built backend data pipelines powering NLP-based text autocomplete, improving query completion speed by 40%</li>
+                    <li>Designed dialogue flow management system enabling context-aware, dynamic conversation routing</li>
+                    <li>Implemented Terraform infrastructure-as-code scripts, reducing setup time from days to hours</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Key Projects Section -->
+        <section class="section fade-in">
+            <h2 class="section-title">
+                <i class="fas fa-rocket"></i> Key Projects
+            </h2>
+            
+            <div class="project">
+                <div class="project-title">Steam Marketplace Real-Time Price Forecasting Platform</div>
+                <div class="project-tech">Big Data, ML, Real-Time Analytics, Google Cloud Platform</div>
+                <ul>
+                    <li>Designed end-to-end big data and ML pipeline on GCP to analyze and predict pricing trends for 10,000+ marketplace items</li>
+                    <li>Built streaming data ingestion with Apache Kafka processing 50GB+ daily transaction data and 5,000+ price updates per hour</li>
+                    <li>Developed PyTorch LSTM time-series forecasting models achieving 87% prediction accuracy with <200ms inference latency</li>
+                    <li>Automated infrastructure deployment with Terraform, reducing setup time by 70%</li>
+                </ul>
+            </div>
+
+            <div class="project">
+                <div class="project-title">Dota 2 Tournament Analytics & Data Warehouse</div>
+                <div class="project-tech">Azure, ETL, Data Modeling, Data Warehousing</div>
+                <ul>
+                    <li>Built production ETL pipeline in Azure Databricks processing 50,000+ professional match records from OpenDota APIs</li>
+                    <li>Designed star schema data warehouse in Azure Data Lake Storage optimized for analytical queries</li>
+                    <li>Developed PySpark jobs for data cleansing, validation, and aggregation of multi-modal structured data</li>
+                    <li>Created interactive Power BI dashboards analyzing competitive meta trends and strategic insights</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
